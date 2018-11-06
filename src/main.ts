@@ -19,8 +19,8 @@ class Game {
       type: Phaser.AUTO,
       // width: window.innerWidth,
       // height: window.innerHeight,
-      width: 320,
-      height: 320,
+      width: 600,
+      height: 600,
       physics: {
         default: 'arcade',
         arcade: {
