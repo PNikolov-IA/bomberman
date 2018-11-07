@@ -1,4 +1,25 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: black;
+  color: white;
+}
+
+#container {
+  width: 1000px;
+  text-align: center;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+#server-data {
+  padding: 10px;
+}
+
+div.instance-wrapper {
+  border-bottom: 1px dashed #333;
+}
+
+div.instance-wrapper:last-child {
+  border-bottom: none !important;
 }

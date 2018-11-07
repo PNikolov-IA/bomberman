@@ -1,14 +1,13 @@
 import phaser from 'phaser';
+// tslint:disable-next-line:no-import-side-effect
+import 'reflect-metadata';
+import { container} from './setup/ioc.config';
 
 import { BombermanMap } from './scenes/bombermanMap';
+import { EventWrapper } from './services';
+import { TYPES } from './setup/types';
 
-import * as io from 'socket.io-client';
-
-const socket: SocketIOClient.Socket = io.connect(`localhost:5000`);
-
-socket.on('message', (msg: string | undefined) => {
-  console.log(msg);
-});
+const connection: EventWrapper = container.get(TYPES.eventwrapper);
 
 class Game {
   private readonly config: Object;
@@ -17,10 +16,9 @@ class Game {
   public constructor() {
     this.config = {
       type: Phaser.AUTO,
-      // width: window.innerWidth,
-      // height: window.innerHeight,
       width: 600,
       height: 600,
+      parent: document.getElementById('game'),
       physics: {
         default: 'arcade',
         arcade: {

@@ -1,4 +1,4 @@
-import phaser, { Time } from 'phaser';
+import phaser, { Input, Time } from 'phaser';
 
 export class BombermanMap extends phaser.Scene {
   public static game: phaser.Game;
@@ -68,8 +68,8 @@ export class BombermanMap extends phaser.Scene {
           }
 
         if (this.input.keyboard.addKey('SPACE').isDown) {
-          this.bomb.anims.play('bombstill', true);
           this.bomb = this.add.sprite(this.playerWithAnimation.x, this.playerWithAnimation.y, 'bomb');
+          this.bomb.anims.play('bombstill', true);
 
           /* Unfinished
           this.time.addEvent({
