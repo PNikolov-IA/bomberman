@@ -2,9 +2,9 @@ import { ICharacter } from './character';
 import { IPlayer } from './player';
 
 export interface IMapInstance {
-  players: IPlayer[];
-  enemies: ICharacter[];
-  lastActive: Date;
-  playersCount: number;
-  maxPlayersCount: number;
+  getPlayers(): IPlayer[];
+  getEnemies(): ICharacter[];
+  getLastActive(): Date;
+  getPlayersCount(): number;
+  getMaxPlayersCount(): number;
 }
