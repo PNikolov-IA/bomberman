@@ -5,5 +5,5 @@ export interface IPlayer extends ICharacter {
   playerID: number;
   points: number;
   lastActive: Date;
-  instance: IMapInstance;
+  instance: IMapInstance | null;
 }
