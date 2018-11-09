@@ -29,19 +29,19 @@ export class MapInstance implements IMapInstance {
 
     this.load(this._mapType);
   }
-  public getPlayers(): IPlayer[] {
+  public get players(): IPlayer[] {
     return this._players;
   }
-  public getEnemies(): ICharacter[] {
+  public get enemies(): ICharacter[] {
     return this._enemies;
   }
-  public getLastActive(): Date {
+  public get lastActive(): Date {
     return this._lastActive;
   }
-  public getPlayersCount(): number {
+  public get playersCount(): number {
     return this._playersCount;
   }
-  public getMaxPlayersCount(): number {
+  public get maxPlayersCount(): number {
     return this._maxPlayersCount;
   }
 
@@ -57,7 +57,6 @@ export class MapInstance implements IMapInstance {
     Return if the player can join or not
     */
     const indexInGame: number = this._players.map((_player: IPlayer) => (_player.playerID)).indexOf(player.playerID);
-
     if (this._playersCount < this._maxPlayersCount && indexInGame < 0) {
       return true;
     } else {
@@ -71,12 +70,11 @@ export class MapInstance implements IMapInstance {
     If the player is added to the instance, update the player.instance to match the instance
     */
     if (this.canJoin(player)) {
-      const indexOfPlayer: number = this._players.map((_player: IPlayer) => (_player.playerID)).indexOf(player.playerID);
-      this._players[indexOfPlayer] = player;
-    } else {
       this._players.push(player);
+      player.instance = this;
+      this._playersCount += 1;
     }
-    this._playersCount += 1;
+
   }
 
   public remove(player: IPlayer): void {
@@ -84,11 +82,12 @@ export class MapInstance implements IMapInstance {
     Make sure you make the necessary checks first
     If the player is removed to the instance, update the player.instance to null
     */
-   const indexOfPlayer: number = this._players.map((_player: IPlayer) => (_player.playerID)).indexOf(player.playerID);
-   if (indexOfPlayer >= 0) {
-     this._players.splice(indexOfPlayer, 1);
-   }
-   this._playersCount -= 1;
+    const indexOfPlayer: number = this._players.map((_player: IPlayer) => (_player.playerID)).indexOf(player.playerID);
+    if (indexOfPlayer >= 0) {
+      this._players.splice(indexOfPlayer, 1);
+    }
+    player.instance = null;
+    this._playersCount -= 1;
   }
 
   public update(): void {

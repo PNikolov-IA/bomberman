@@ -5,23 +5,22 @@ import { MapInstance } from '../../controllers/wrappers/map-instance';
 
 export class Player extends GameObject implements IPlayer {
   private static pid: number = 0;
-  private readonly _points: number = 0;
+  private readonly _points: number;
   private readonly _lastActive: Date = new Date();
-  private readonly _instance: IMapInstance;
+  private _instance: IMapInstance | null;
   private readonly _isAlive: boolean = true;
   private readonly _intents: IntentType[];
   private readonly _speed: number = 20;
   private _playerID: number;
 
   public constructor(
-    x: number, 
-    y: number, 
-    width: number, 
+    x: number,
+    y: number,
+    width: number,
     height: number,
-    points: number,
-    instance: IMapInstance,
     lastActive: Date,
-    isAlive: boolean
+    isAlive: boolean,
+    instance: IMapInstance | null
     ) {
     super(x, y, height, width);
     /* Encapsulate public properties and implement getters
@@ -32,8 +31,8 @@ export class Player extends GameObject implements IPlayer {
     Set "objecttype" to GameObjectType.Player
     */
 
-    this._points = points;
-    this._instance = instance; //null; // ??? ask Stoyan
+    this._points = 0;
+    this._instance = null;
     this._lastActive = lastActive;
     this._isAlive = isAlive;
     this._objecttype = GameObjectType.Player;
@@ -44,10 +43,12 @@ export class Player extends GameObject implements IPlayer {
     return this._points;
   }
 
-  public get instance(): IMapInstance {
+  public get instance(): IMapInstance | null {
     return this._instance;
   }
-
+  public set instance(instance: IMapInstance | null) {
+    this._instance = instance;
+  }
   public get lastActive(): Date {
     return this._lastActive;
   }
