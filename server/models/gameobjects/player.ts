@@ -16,7 +16,10 @@ export class Player extends GameObject implements IPlayer {
     x: number,
     y: number,
     width: number,
-    height: number
+    height: number,
+    lastActive: Date,
+    isAlive: boolean,
+    instance: IMapInstance | null
     ) {
     super(x, y, height, width);
     /* Encapsulate public properties and implement getters

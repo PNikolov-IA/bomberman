@@ -1,6 +1,7 @@
 import { IGame, IMapInstance, IPlayer } from '../../contracts';
 
 export class Game implements IGame {
+  protected static objects: number = 0;
   private _players: IPlayer[];
   private _instances: IMapInstance[];
   private readonly _started: Date;
@@ -28,16 +29,16 @@ export class Game implements IGame {
    this._started = started;
    this._isActive = isActive;
   }
-  public getPlayers(): IPlayer[] {
+  public get players(): IPlayer[] {
     return this._players;
   }
-  public getInstances(): IMapInstance[] {
+  public get instances(): IMapInstance[] {
     return this._instances;
   }
-  public getStarted(): Date {
+  public get started(): Date {
     return this._started;
   }
-  public getIsActive(): boolean {
+  public get isActive(): boolean {
     return this._isActive;
   }
 }
