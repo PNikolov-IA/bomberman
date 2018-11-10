@@ -1,4 +1,4 @@
-import {inject, injectable} from 'inversify';
+import { inject, injectable } from 'inversify';
 import jquery from 'jquery';
 import { IIntance } from '../contracts';
 import { TYPES } from '../setup/types';

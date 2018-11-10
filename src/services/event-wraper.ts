@@ -1,4 +1,4 @@
-import {inject, injectable} from 'inversify';
+import { inject, injectable } from 'inversify';
 
 import * as io from 'socket.io-client';
 import { Notifier } from '.';
@@ -20,9 +20,9 @@ export class EventWrapper {
     @inject(TYPES.notifier) notifier: Notifier,
     @inject(TYPES.menucontroller) menucontroller: MenuController,
     @inject(TYPES.instancelistcontroller) instancelistcontroller: InstanceListController
-    ) {
+  ) {
     this.notifier = notifier;
-    this.menucontroller =  menucontroller;
+    this.menucontroller = menucontroller;
     this.instancelistcontroller = instancelistcontroller;
     this.socket = io.connect(ADDRESS);
     this.hook();
@@ -58,7 +58,7 @@ export class EventWrapper {
 
     // Receiving information about the server, update
     this.socket.on('serverdata', (msg: string) => {
-      const result: {instances: IIntance[]} = JSON.parse(msg);
+      const result: { instances: IIntance[] } = JSON.parse(msg);
       this.instancelistcontroller.update(result.instances);
     });
   }
