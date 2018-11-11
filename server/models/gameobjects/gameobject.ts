@@ -4,15 +4,20 @@ export class GameObject implements IGameObject {
   protected _objecttype: GameObjectType;
   private _x: number;
   private _y: number;
+  private _id: number;
   private readonly _width: number;
   private readonly _height: number;
 
-  public constructor (x: number, y: number, height: number, width: number) {
-
+  public constructor(x: number, y: number, height: number, width: number, id: number) {
+    this._id = id;
     this._x = x;
     this._y = y;
     this._width = width;
     this._height = height;
+  }
+
+  public get id(): number {
+    return this._id;
   }
 
   public get x(): number {

@@ -15,9 +15,6 @@ export class InstanceListController {
   }
 
   public update(instances: IIntance[]): void {
-    // Update instance list
-    // Remove the content of this.element
-    // And update it using the template engine injected in the controller
-    // Look into the template code and find out how it works
+    this.element.html(instances.reduce((acc: string, instance: IIntance) => acc + this.template.compile(instance), ''));
   }
 }

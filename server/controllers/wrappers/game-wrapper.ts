@@ -2,10 +2,19 @@ import { inject, injectable } from 'inversify';
 // tslint:disable-next-line:no-import-side-effect
 import 'reflect-metadata';
 import * as IO from 'socket.io';
+import { IUser } from '../../common';
+import { UserFactory } from '../../models/factories/user-factory';
 import { GameServer } from '../../router/server';
+import { TYPES } from '../../setup/types';
+import { Game } from './game';
 
 @injectable()
 class GameWrapper {
+  protected static usersCount: number = 0;
+  @inject(TYPES.game)
+  private game: Game;
+  @inject(TYPES.userfactory)
+  private userfactory: UserFactory;
   private _socketIO: IO.Server;
   private _gameserver: GameServer;
 
@@ -21,7 +30,25 @@ class GameWrapper {
 
   private hook(): void {
     this._socketIO.on('connection', (socket: IO.Server) => {
-      socket.emit('message', 'connected');
+
+      // Connect to the game
+      const user: IUser = this.userfactory.create(GameWrapper.usersCount += 1);
+      if (this.game.join({user: user, socket: socket})) {
+        // Welcome to the server
+        socket.emit('message', 'Welcome to Bomberman Online!');
+      } else {
+        socket.emit('message', 'Something went wrong, please refresh the webpage.');
+      }
+
+      // On create game request
+      socket.on('create', (layout: string) => {
+        this.game.create(user);
+      });
+
+      // Disconnect from the game
+      socket.on('disconnect', () => {
+        this.game.leave(user);
+      });
     });
   }
 }

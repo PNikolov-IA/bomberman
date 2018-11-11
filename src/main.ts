@@ -16,7 +16,7 @@ class Game {
   public constructor() {
     this.config = {
       type: Phaser.AUTO,
-      width: 600,
+      width: 900,
       height: 600,
       parent: document.getElementById('game'),
       physics: {

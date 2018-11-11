@@ -11,24 +11,16 @@ export class Player extends GameObject implements IPlayer {
   private _intents: IntentType[];
   private readonly _speed: number = 20;
   private _playerID: number;
+  private _userID: number;
 
   public constructor(
     x: number,
     y: number,
     width: number,
     height: number,
-    lastActive: Date,
-    isAlive: boolean,
-    instance: IMapInstance | null
-    ) {
-    super(x, y, height, width);
-    /* Encapsulate public properties and implement getters
-    Set initial points to 0
-    Set initial instance to null
-    Set "lastActive" to the current Date
-    Set "isAlive" to true
-    Set "objecttype" to GameObjectType.Player
-    */
+    id: number
+  ) {
+    super(x, y, height, width, id);
 
     this._points = 0;
     this._instance = null;
@@ -60,6 +52,14 @@ export class Player extends GameObject implements IPlayer {
 
   public get playerID(): number {
     return this._playerID;
+  }
+
+  public set userID(id: number) {
+    this._userID = id;
+  }
+
+  public get userID(): number {
+    return this._userID;
   }
 
   public get speed(): number {

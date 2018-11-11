@@ -3,20 +3,19 @@ import { IGameObject } from '../../contracts';
 import { GameObject } from './gameobject';
 
 export class Bomb extends GameObject implements IGameObject {
+  // Time before the bomb goes off in milliseconds
   private static readonly _duration: number = 2500;
   private readonly _planted: Date;
-  private _timeleft: number;
   private _timeactive: number;
-  // Time before the bomb goes off in milliseconds
 
   public constructor(
     x: number,
     y: number,
     width: number,
     height: number,
-    timeleft: number
+    id: number
   ) {
-    super(x, y, height, width);
+    super(x, y, height, width, id);
     /* Encapsulate public properties and implement getters
     Set "planted" to the current Date
     Set "timeactive" to 0
@@ -24,7 +23,6 @@ export class Bomb extends GameObject implements IGameObject {
     */
     this._objecttype = GameObjectType.Bomb;
     this._planted = new Date();
-    this._timeleft = timeleft;
     this._timeactive = 0;
   }
 
@@ -32,10 +30,10 @@ export class Bomb extends GameObject implements IGameObject {
     return this._planted;
   }
   public get timeleft(): number {
-    return this._timeleft;
+    return Bomb._duration - (new Date().valueOf() - this._planted.valueOf());
   }
   public get timeactive(): number {
-    return this._timeactive;
+    return new Date().valueOf() - this._planted.valueOf();
   }
   public get duration(): number {
     return Bomb._duration;

@@ -3,7 +3,7 @@ import { inject, injectable } from 'inversify';
 import * as io from 'socket.io-client';
 import { Notifier } from '.';
 import { IIntance } from '../contracts';
-import { InstanceListController, MenuController } from '../controllers';
+import { CreateGameController, InstanceListController, MenuController } from '../controllers';
 import { TYPES } from '../setup/types';
 
 const ADDRESS: string = `localhost:5000`;
@@ -12,16 +12,19 @@ const ADDRESS: string = `localhost:5000`;
 export class EventWrapper {
   private socket: SocketIOClient.Socket;
   private _connected: boolean = false;
+  private readonly creategamecontroller: CreateGameController;
   private readonly notifier: Notifier;
   private readonly menucontroller: MenuController;
   private readonly instancelistcontroller: InstanceListController;
 
   public constructor(
     @inject(TYPES.notifier) notifier: Notifier,
+    @inject(TYPES.creategamecontroller) creategamecontroller: CreateGameController,
     @inject(TYPES.menucontroller) menucontroller: MenuController,
     @inject(TYPES.instancelistcontroller) instancelistcontroller: InstanceListController
   ) {
     this.notifier = notifier;
+    this.creategamecontroller = creategamecontroller;
     this.menucontroller = menucontroller;
     this.instancelistcontroller = instancelistcontroller;
     this.socket = io.connect(ADDRESS);
@@ -33,16 +36,23 @@ export class EventWrapper {
   }
 
   private hook(): void {
+
+    // Hook contollers
+    this.creategamecontroller.onCreate(() => {
+      if (this._connected) {
+        this.socket.emit('create', '1');
+      }
+    });
+
     // The client has connected to the server
     this.socket.on('connect', () => {
       this._connected = true;
       this.notifier.notify('Connected to the server.');
     });
 
-    // The client has been disconneced from the server
-    this.socket.on('disconnect', () => {
-      this._connected = false;
-      this.notifier.notify('Disconnected from the server.');
+    // On notification message
+    this.socket.on('message', (msg: string) => {
+      this.notifier.notify(msg);
     });
 
     // Player has joined an instance, hide the menu
@@ -51,15 +61,26 @@ export class EventWrapper {
       // Additional logic here
     });
 
+    // Receiving information about the server, update
+    this.socket.on('serverdata', (msg: string) => {
+      const result: { instances: IIntance[] } = JSON.parse(msg);
+      this.instancelistcontroller.update(result.instances);
+    });
+
+    // Receiving game object data upate from the surver
+    this.socket.on('update', (msg: string) => {
+      console.log('update', msg);
+    });
+
     // Player has left the instance, show the menu
     this.socket.on('leave', () => {
       this.menucontroller.show();
     });
 
-    // Receiving information about the server, update
-    this.socket.on('serverdata', (msg: string) => {
-      const result: { instances: IIntance[] } = JSON.parse(msg);
-      this.instancelistcontroller.update(result.instances);
+    // The client has been disconneced from the server
+    this.socket.on('disconnect', () => {
+      this._connected = false;
+      this.notifier.notify('Disconnected from the server.');
     });
   }
 }

@@ -5,7 +5,7 @@ import {
   httpPost,
   httpPut
 } from 'inversify-express-utils';
-import { IUser, UserService } from '../service/user';
+import { INUser, UserService } from '../service/user';
 
 import { Request } from 'express';
 import { inject } from 'inversify';
@@ -21,22 +21,22 @@ export class UserController {
   }
 
   @httpGet('/')
-  public getUsers(): IUser[] {
+  public getUsers(): INUser[] {
     return this._userService.getUsers();
   }
 
   @httpGet('/:id')
-  public getUser(request: Request): IUser {
+  public getUser(request: Request): INUser {
     return this._userService.getUser(request.params.id);
   }
 
   @httpPost('/')
-  public newUser(request: Request): IUser {
+  public newUser(request: Request): INUser {
     return this._userService.newUser(request.body);
   }
 
   @httpPut('/:id')
-  public updateUser(request: Request): IUser {
+  public updateUser(request: Request): INUser {
     return this._userService.updateUser(request.params.id, request.body);
   }
 

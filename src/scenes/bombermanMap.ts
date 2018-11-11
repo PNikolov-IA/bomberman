@@ -12,7 +12,7 @@ export class BombermanMap extends phaser.Scene {
   }
 
   public preload(): void {
-    this.load.tilemapTiledJSON('tilemap', '../assets/BombermanTileset.json');
+    this.load.tilemapTiledJSON('tilemap', '../assets/Woods.json');
     this.load.image('tiles', '../assets/overworld_tileset_grass.png');
     this.load.image('boxes', '../assets/0x72_16x16DungeonTileset.v1.png');
     this.load.image('food', '../assets/Food.png');
@@ -23,16 +23,10 @@ export class BombermanMap extends phaser.Scene {
     this.map = this.add.tilemap('tilemap');
 
     const grass: phaser.Tilemaps.Tileset = this.map.addTilesetImage('overworld_tileset_grass', 'tiles');
-    const backgroundLayer: phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer('Background', grass, 0, 0);
+    const backgroundLayer: phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer('Base', grass, 0, 0);
 
-    backgroundLayer.setDisplaySize(600, 600);
-    // B backgroundLayer.setPosition(screen.height / 2 - backgroundLayer.width / 2 , screen.height / 2  - backgroundLayer.height / 2);
-
-    const boxes: phaser.Tilemaps.Tileset = this.map.addTilesetImage('0x72_16x16DungeonTileset.v1', 'boxes');
-    const food: phaser.Tilemaps.Tileset = this.map.addTilesetImage('Food', 'food');
-
-    const iteractableLayer: phaser.Tilemaps.DynamicTilemapLayer = this.map.createDynamicLayer('Interactable', [boxes, food], 0, 0);
-    iteractableLayer.setDisplaySize(600, 600);
+    backgroundLayer.setDisplaySize(900, 600);
+    backgroundLayer.setPosition(0, 0);
 
     this.playerWithAnimation = this.add.sprite(64, 64, 'man');
     this.anims.create({

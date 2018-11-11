@@ -1,8 +1,8 @@
+import { ISubscriber } from '../common/subscriber';
 import { IMapInstance } from './mapinstance';
-import { IPlayer } from './player';
 
 export interface IGame {
-  players: IPlayer[];
+  subscribers: ISubscriber[];
   instances: IMapInstance[];
   started: Date;
   isActive: boolean;

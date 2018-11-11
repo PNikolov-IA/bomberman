@@ -1,31 +1,32 @@
-import { IntentType, MapType } from '../../common';
+import { inject } from 'inversify';
+import { IntentType, IUser, MapType } from '../../common';
 import { ICharacter, IMapInstance, IPlayer } from '../../contracts';
+import { TYPES } from '../../setup/types';
+import { IGameObject } from './../../contracts/gameobject';
+import { GameObjectFactory } from './../../models/factories/game-object-factory';
 
 export class MapInstance implements IMapInstance {
   private static pid: number = 0;
   private _players: IPlayer[];
+  private readonly factory: GameObjectFactory;
   private _enemies: ICharacter[];
+  private _objects: IGameObject[];
   private _lastActive: Date;
-  private _playersCount: number;
+  private _playersCount: number = 0;
   private readonly _maxPlayersCount: number = 4;
   // Maximum time with no players in the instance before it's destroyed
   private readonly maxTimeDormant: number = 900;
   private _id: number;
   private _mapType: MapType;
+  private _completed: boolean = false;
 
-  public constructor(
-    mapType: MapType,
-    lastActive: Date
-  ) {
+  public constructor(mapType: MapType, factory: GameObjectFactory) {
+    this.factory = factory;
     this._id = MapInstance.pid += 1;
     this._mapType = mapType;
     this._players = [];
     this._enemies = [];
-    this._lastActive = lastActive;
-    /* Create getters for all public properties and encapsulate them
-    Initialize "players", "enemies" to blank "[]"
-    initialize "lastActive" field
-    */
+    this._lastActive = new Date();
 
     this.load(this._mapType);
   }
@@ -49,14 +50,8 @@ export class MapInstance implements IMapInstance {
     return this._id;
   }
 
-  public canJoin(player: IPlayer): boolean {
-    /* Implement
-    Player can join if:
-    - the instance is not full -> playersCount < maxPlayersCount
-    - the player hasn't joined in already (check the player.playerID)
-    Return if the player can join or not
-    */
-    const indexInGame: number = this._players.map((_player: IPlayer) => (_player.playerID)).indexOf(player.playerID);
+  public canJoin(user: IUser): boolean {
+    const indexInGame: number = this._players.map((_player: IPlayer) => (_player.userID)).indexOf(user.id);
     if (this._playersCount < this._maxPlayersCount && indexInGame < 0) {
       return true;
     } else {
@@ -64,12 +59,20 @@ export class MapInstance implements IMapInstance {
     }
   }
 
-  public join(player: IPlayer): void {
-    /* add the player to the player list
-    Make sure you make the necessary checks first
-    If the player is added to the instance, update the player.instance to match the instance
-    */
-    if (this.canJoin(player)) {
+  public hasUser(user: IUser): boolean {
+    let hasUser: boolean = false;
+    this.players.forEach((player: IPlayer) => {
+      if (player.userID === user.id) {
+        hasUser = true;
+      }
+    });
+
+    return hasUser;
+  }
+
+  public join(user: IUser): void {
+    if (this.canJoin(user)) {
+      const player: IPlayer = this.factory.createPlayer(250, 250);
       this._players.push(player);
       player.instance = this;
       this._playersCount += 1;
@@ -77,23 +80,41 @@ export class MapInstance implements IMapInstance {
 
   }
 
-  public remove(player: IPlayer): void {
-    /* remove the player to the player list
-    Make sure you make the necessary checks first
-    If the player is removed to the instance, update the player.instance to null
-    */
-    const indexOfPlayer: number = this._players.map((_player: IPlayer) => (_player.playerID)).indexOf(player.playerID);
+  public remove(user: IUser): void {
+
+    const indexOfPlayer: number = this._players.map((_player: IPlayer) => (_player.userID)).indexOf(user.id);
     if (indexOfPlayer >= 0) {
+      const player: IPlayer = this._players[indexOfPlayer];
       this._players.splice(indexOfPlayer, 1);
+      player.instance = null;
+      this._playersCount -= 1;
+      user.leave();
     }
-    player.instance = null;
-    this._playersCount -= 1;
   }
 
   public update(): void {
     /* Do not implement yet
     This will be tied to controller/keyboard triggers sent over the net
     */
+  }
+
+  public objects(): IGameObject[] {
+    return this._objects;
+  }
+
+  public enumerate(): IGameObject[] {
+    const all: IGameObject[] = [];
+    this._objects.forEach((object: IGameObject) => {
+      all.push(object);
+    });
+    this._enemies.forEach((object: IGameObject) => {
+      all.push(object);
+    });
+    this._players.forEach((object: IGameObject) => {
+      all.push(object);
+    });
+
+    return all;
   }
 
   private load(mapType: MapType): void {

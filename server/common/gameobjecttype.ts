@@ -4,5 +4,6 @@ export enum GameObjectType {
   Enemy,
   Player,
   Bomb,
-  Interactable
+  Interactable,
+  Boundary
 }

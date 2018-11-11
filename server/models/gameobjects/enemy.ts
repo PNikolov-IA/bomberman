@@ -7,14 +7,8 @@ export class Enemy extends GameObject implements IGameObject {
   private _direction: PathDirection;
   private _pathPosition: number;
 
-  public constructor(x: number, y: number, width: number, height: number, path: IPoint[]) {
-    super(x, y, height, width);
-    /* Encapsulate public properties and implement getters
-    Property "path" should return direct referrence to the array for testing purposes
-    Implement validator for "path"
-    Set "objecttype" to GameObjectType.Enemy
-    Set _direction to PathDirection.Forward
-    */
+  public constructor(x: number, y: number, width: number, height: number, id: number, path: IPoint[]) {
+    super(x, y, height, width, id);
     if (!path) {
       throw new Error('No path defined');
     }

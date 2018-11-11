@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
 
-export interface IUser {
+export interface INUser {
   email: string;
   name: string;
 }
@@ -8,36 +8,36 @@ export interface IUser {
 @injectable()
 export class UserService {
 
-  private userStorage: IUser[] = [{
+  private userStorage: INUser[] = [{
     email: 'lorem@ipsum.com',
     name: 'Lorem'
   }, {
-      email: 'doloe@sit.com',
-      name: 'Dolor'
-    }];
+    email: 'doloe@sit.com',
+    name: 'Dolor'
+  }];
 
-  public getUsers(): IUser[] {
+  public getUsers(): INUser[] {
     return this.userStorage;
   }
 
-  public getUser(id: string): IUser {
-    this.userStorage.map((user: IUser) => {
+  public getUser(id: string): INUser {
+    this.userStorage.map((user: INUser) => {
       if (user.name === id) {
         return user;
       }
     });
 
-    return {email: '', name: ''};
+    return { email: '', name: '' };
   }
 
-  public newUser(user: IUser): IUser {
+  public newUser(user: INUser): INUser {
     this.userStorage.push(user);
 
     return user;
   }
 
-  public updateUser(id: string, user: IUser): IUser {
-    this.userStorage.map((entry: IUser, index: number) => {
+  public updateUser(id: string, user: INUser): INUser {
+    this.userStorage.map((entry: INUser, index: number) => {
       if (entry.name === id) {
         this.userStorage[index] = user;
       }
@@ -47,8 +47,8 @@ export class UserService {
   }
 
   public deleteUser(id: string): string {
-    const updatedUser: IUser[] = [];
-    this.userStorage.map((user: IUser) => {
+    const updatedUser: INUser[] = [];
+    this.userStorage.map((user: INUser) => {
       if (user.name !== id) {
         updatedUser.push(user);
       }

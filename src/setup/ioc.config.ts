@@ -1,5 +1,5 @@
 import { Container } from 'inversify';
-import { InstanceListController, MenuController } from '../controllers';
+import { CreateGameController, InstanceListController, MenuController } from '../controllers';
 import {EventWrapper, Notifier} from '../services';
 import { InstanceTemplate } from '../templates/instance';
 import { TYPES } from './types';
@@ -7,6 +7,7 @@ import { TYPES } from './types';
 const container: Container = new Container();
 
 // Controllers
+container.bind(TYPES.creategamecontroller).to(CreateGameController).inSingletonScope();
 container.bind(TYPES.menucontroller).to(MenuController).inSingletonScope();
 container.bind(TYPES.instancelistcontroller).to(InstanceListController).inSingletonScope();
 

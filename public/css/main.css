@@ -23,3 +23,12 @@ div.instance-wrapper {
 div.instance-wrapper:last-child {
   border-bottom: none !important;
 }
+
+#create {
+  width: 200px;
+  line-height: 28px;
+  margin: 2em auto;
+  padding: 5px;
+  border: 1px solid yellowgreen;
+  cursor: pointer;
+}
