@@ -33,7 +33,7 @@ class GameWrapper {
 
       // Connect to the game
       const user: IUser = this.userfactory.create(GameWrapper.usersCount += 1);
-      if (this.game.join({user: user, socket: socket})) {
+      if (this.game.join({ user: user, socket: socket })) {
         // Welcome to the server
         socket.emit('message', 'Welcome to Bomberman Online!');
       } else {
@@ -43,6 +43,7 @@ class GameWrapper {
       // On create game request
       socket.on('create', (layout: string) => {
         this.game.create(user);
+        socket.emit('join', '1');
       });
 
       // Disconnect from the game

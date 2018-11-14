@@ -1,12 +1,13 @@
 import { GameObjectType, IntentType, MapType } from '../../common';
 import { IMapInstance, IPlayer } from '../../contracts';
+import { MapInstance } from '../../controllers';
 import { GameObject } from './gameobject';
 
 export class Player extends GameObject implements IPlayer {
   private static pid: number = 0;
   private _points: number;
   private _lastActive: Date;
-  private _instance: IMapInstance | null;
+  private _instance: MapInstance | null;
   private _isAlive: boolean;
   private _intents: IntentType[];
   private readonly _speed: number = 20;
@@ -34,11 +35,11 @@ export class Player extends GameObject implements IPlayer {
     return this._points;
   }
 
-  public get instance(): IMapInstance | null {
+  public get instance(): MapInstance | null {
     return this._instance;
   }
 
-  public set instance(instance: IMapInstance | null) {
+  public set instance(instance: MapInstance | null) {
     this._instance = instance;
   }
 

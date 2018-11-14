@@ -1,9 +1,11 @@
+import { GameObjectHolderController } from './../controllers/game-object-holder';
 import { inject, injectable } from 'inversify';
 
 import * as io from 'socket.io-client';
 import { Notifier } from '.';
 import { IIntance } from '../contracts';
 import { CreateGameController, InstanceListController, MenuController } from '../controllers';
+import { Game } from '../game/game';
 import { TYPES } from '../setup/types';
 
 const ADDRESS: string = `localhost:5000`;
@@ -16,17 +18,23 @@ export class EventWrapper {
   private readonly notifier: Notifier;
   private readonly menucontroller: MenuController;
   private readonly instancelistcontroller: InstanceListController;
+  private readonly gameobjectcontroller: GameObjectHolderController;
+
+  private game: Game | null;
 
   public constructor(
     @inject(TYPES.notifier) notifier: Notifier,
     @inject(TYPES.creategamecontroller) creategamecontroller: CreateGameController,
     @inject(TYPES.menucontroller) menucontroller: MenuController,
-    @inject(TYPES.instancelistcontroller) instancelistcontroller: InstanceListController
+    @inject(TYPES.instancelistcontroller) instancelistcontroller: InstanceListController,
+    @inject(TYPES.gameobjectholdercontroller) gameobjectcontroller: GameObjectHolderController
   ) {
     this.notifier = notifier;
     this.creategamecontroller = creategamecontroller;
     this.menucontroller = menucontroller;
     this.instancelistcontroller = instancelistcontroller;
+    this.gameobjectcontroller = gameobjectcontroller;
+    console.log(gameobjectcontroller);
     this.socket = io.connect(ADDRESS);
     this.hook();
   }
@@ -59,6 +67,7 @@ export class EventWrapper {
     this.socket.on('join', () => {
       this.menucontroller.hide();
       // Additional logic here
+      this.game = new Game();
     });
 
     // Receiving information about the server, update
@@ -69,12 +78,15 @@ export class EventWrapper {
 
     // Receiving game object data upate from the surver
     this.socket.on('update', (msg: string) => {
-      console.log('update', msg);
+      // tslint:disable-next-line:no-any
+      const data: any = JSON.parse(msg);
+      this.gameobjectcontroller.update(data.gamedata, data.ownID);
     });
 
     // Player has left the instance, show the menu
     this.socket.on('leave', () => {
       this.menucontroller.show();
+      this.game = null;
     });
 
     // The client has been disconneced from the server

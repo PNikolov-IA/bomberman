@@ -1,6 +1,7 @@
 import { GameObjectType } from '../common/gameobjecttype';
 
 export interface IGameObject {
+  id: number;
   x: number;
   y: number;
   width: number;

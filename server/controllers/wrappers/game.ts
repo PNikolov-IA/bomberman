@@ -65,7 +65,7 @@ export class Game implements IGame {
       return;
     }
 
-    const instancesData: {id: number; players: number; maxPlayers: number; layout: number}[] = [];
+    const instancesData: { id: number; players: number; maxPlayers: number; layout: number }[] = [];
 
     // Update all instances
     this._instances.forEach((instance: MapInstance) => {
@@ -75,10 +75,11 @@ export class Game implements IGame {
         id: instance.id,
         players: instance.playersCount,
         maxPlayers: instance.maxPlayersCount,
-        layout: 1});
+        layout: 1
+      });
     });
 
-    const instanceResponce: string = JSON.stringify({instances: instancesData});
+    const instanceResponce: string = JSON.stringify({ instances: instancesData });
 
     this._subscribers.forEach((subscriber: ISubscriber) => {
       if (!subscriber.user.ingame) {
@@ -86,6 +87,16 @@ export class Game implements IGame {
         subscriber.socket.emit('serverdata', instanceResponce);
       } else {
         // Send updated game object data
+        this._instances.forEach((instance: MapInstance) => {
+          if (instance.hasUser(subscriber.user)) {
+            // tslint:disable-next-line:no-any
+            const result: any = {
+              ownID: subscriber.user.id,
+              gamedata: instance.exports
+            };
+            subscriber.socket.emit('update', JSON.stringify(result));
+          }
+        });
       }
     });
 

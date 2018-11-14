@@ -1,8 +1,8 @@
 export enum GameObjectType {
+  Player,
+  Enemy,
   Indestructable,
   Destructable,
-  Enemy,
-  Player,
   Bomb,
   Interactable,
   Boundary
