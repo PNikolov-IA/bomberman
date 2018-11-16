@@ -1,5 +1,6 @@
 import { injectable } from 'inversify';
 import phaser from 'phaser';
+import { GameObjectType } from './../../server/common/gameobjecttype';
 
 @injectable()
 export class GameObjectHolderController {
@@ -20,7 +21,7 @@ export class GameObjectHolderController {
     if (data) {
       this.received = data;
     }
-    console.log(data);
+    //console.log(data);
   }
 
   public render(scene: phaser.Scene): void {
@@ -28,19 +29,41 @@ export class GameObjectHolderController {
 
     // Create new game objects
     // tslint:disable-next-line:no-any
+    const receivedArray: number[] = this.hold.map((el: any) => el.id);
+    // tslint:disable-next-line:no-any
+    const holdArray: number[] = this.hold.map((el: any) => el.id);
+    // tslint:disable-next-line:no-any
     this.received.forEach((element: any) => {
-      // If object id is not in "hold", create a new sprite and add it to "hold"
-      // Check object type
-      // This: const obj: {id: number; sprite: phaser.GameObject.Sprite} = scene.add.sprite(...)
-      // This: this.hold.push(obj)
 
-      // If object is already in "hold" (objInHold.id === objInReceived.id)
-      // Update objInHold.x/y
+      if (!holdArray.includes(element.id)) {
+        if (GameObjectType[element.objecttype] === 'Destructable') {
+          const destructable: phaser.GameObjects.Sprite = scene.add.sprite(
+            element.x,
+            element.y,
+            `Destructable`
+          );
+          //destructable.setDisplaySize(32, 32);
+          this.hold.push({ id: element.id, sprite: destructable });
+        }
+        if (GameObjectType[element.objecttype] === 'Indestructable') {
+          const indestructable: phaser.GameObjects.Sprite = scene.add.sprite(
+            element.x,
+            element.y,
+            `Indestructable`
+          );
+          //indestructable.setDisplaySize(32, 32);
+          this.hold.push({ id: element.id, sprite: indestructable });
+        }
+
+      } else {
+        const index: number = holdArray.indexOf(element.id);
+        this.hold[index].x = element.x;
+        this.hold[index].y = element.y;
+      }
     });
 
-    // Update in-game sprites
-    this.hold.forEach((element: { id: number; sprite: phaser.GameObjects.Sprite }) => {
-      // Remove objects from "hold" if their matching "id" is not in "received"
-    });
+    // tslint:disable-next-line:no-any
+    this.hold = this.hold.filter((element: any) => receivedArray.includes(element.id));
+
   }
 }

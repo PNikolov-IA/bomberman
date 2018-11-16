@@ -20,8 +20,8 @@ export class GameScene extends phaser.Scene {
   public preload(): void {
     this.load.tilemapTiledJSON('tilemap', '../assets/Woods.json');
     this.load.image('tiles', '../assets/overworld_tileset_grass.png');
-    this.load.image('boxes', '../assets/0x72_16x16DungeonTileset.v1.png');
-    this.load.image('food', '../assets/Food.png');
+    this.load.image('Destructable', '../assets/brick.png');
+    this.load.image('Indestructable', '../assets/stone.png');
     this.load.spritesheet('man', '../assets/walking_man.png', { frameWidth: 16, frameHeight: 28 });
     this.load.spritesheet('bomb', '../assets/bomb.png', { frameWidth: 22, frameHeight: 23 });
   }

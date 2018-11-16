@@ -3,8 +3,12 @@ import { MapType } from '../common';
 // tslint:disable-next-line
 export const MAPS: any = {
   [MapType.Woods]: {
-    destructables: [{ x: 3, y: 3 }],
-    indestructables: [{ x: 5, y: 5 }],
+    destructables: [
+      { x: 3, y: 3 }
+    ],
+    indestructables: [
+      { x: 5, y: 5 }
+    ],
     boundaries: [
       { x: 0, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }, { x: 3, y: 0 }, { x: 4, y: 0 }, { x: 5, y: 0 }, { x: 6, y: 0 },
       { x: 7, y: 0 }, { x: 8, y: 0 }, { x: 9, y: 0 }, { x: 10, y: 0 }, { x: 11, y: 0 }, { x: 12, y: 0 },
