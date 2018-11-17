@@ -4,10 +4,16 @@ import { MapType } from '../common';
 export const MAPS: any = {
   [MapType.Woods]: {
     destructables: [
-      { x: 3, y: 3 }
+      { x: 3, y: 3 },
+      { x: 3, y: 5 },
+      { x: 5, y: 3 },
+      { x: 5, y: 5 },
+      { x: 5, y: 7 }
     ],
     indestructables: [
-      { x: 5, y: 5 }
+      { x: 3, y: 4 },
+      { x: 3, y: 6 },
+      { x: 4, y: 5 }
     ],
     boundaries: [
       { x: 0, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }, { x: 3, y: 0 }, { x: 4, y: 0 }, { x: 5, y: 0 }, { x: 6, y: 0 },

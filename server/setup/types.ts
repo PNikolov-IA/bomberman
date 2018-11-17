@@ -5,5 +5,6 @@ export const TYPES: any = {
   gamewrapper: Symbol.for('gamewrapper'),
   gameobjectfactory: Symbol.for('gameobjectfactory'),
   mapinstancefacory: Symbol.for('mapinstancefactory'),
-  userfactory: Symbol.for('userfactory')
+  userfactory: Symbol.for('userfactory'),
+  commandscontroller: Symbol.for('commandscontroller')
 };

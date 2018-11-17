@@ -3,8 +3,9 @@ import { GameObjectHolderController } from './../controllers/game-object-holder'
 
 import * as io from 'socket.io-client';
 import { Notifier } from '.';
+import { IntentType } from '../common/intenttype';
 import { IIntance } from '../contracts';
-import { CreateGameController, InstanceListController, MenuController } from '../controllers';
+import { CommandsController, CreateGameController, InstanceListController, MenuController } from '../controllers';
 import { Game } from '../game/game';
 import { TYPES } from '../setup/types';
 
@@ -15,6 +16,7 @@ export class EventWrapper {
   private socket: SocketIOClient.Socket;
   private _connected: boolean = false;
   private readonly creategamecontroller: CreateGameController;
+  private readonly commandscontroller: CommandsController;
   private readonly notifier: Notifier;
   private readonly menucontroller: MenuController;
   private readonly instancelistcontroller: InstanceListController;
@@ -25,12 +27,14 @@ export class EventWrapper {
   public constructor(
     @inject(TYPES.notifier) notifier: Notifier,
     @inject(TYPES.creategamecontroller) creategamecontroller: CreateGameController,
+    @inject(TYPES.commandscontroller) commandscontroller: CommandsController,
     @inject(TYPES.menucontroller) menucontroller: MenuController,
     @inject(TYPES.instancelistcontroller) instancelistcontroller: InstanceListController,
     @inject(TYPES.gameobjectholdercontroller) gameobjectcontroller: GameObjectHolderController
   ) {
     this.notifier = notifier;
     this.creategamecontroller = creategamecontroller;
+    this.commandscontroller = commandscontroller;
     this.menucontroller = menucontroller;
     this.instancelistcontroller = instancelistcontroller;
     this.gameobjectcontroller = gameobjectcontroller;
@@ -81,6 +85,9 @@ export class EventWrapper {
       // tslint:disable-next-line:no-any
       const data: any = JSON.parse(msg);
       this.gameobjectcontroller.update(data.gamedata, data.ownID);
+      if (this.commandscontroller.commands.length) {
+        this.socket.emit('intentions', JSON.stringify({intentions: this.commandscontroller.commands}));
+      }
     });
 
     // Player has left the instance, show the menu

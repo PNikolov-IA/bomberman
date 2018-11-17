@@ -1,6 +1,8 @@
 import { Container } from 'inversify';
+import { ICommandsController } from '../common/commands';
 import { IGame, IGameObjectFactory, IGameWrapper, IMapInstanceFactory, IUserFactory } from '../contracts';
 import { GameWrapper } from '../controllers';
+import { CommandsController } from '../controllers/commands';
 import { GameObjectFactory } from '../models/factories/game-object-factory';
 import { MapInstanceFactory } from '../models/factories/map-instance-factory';
 import { UserFactory } from '../models/factories/user-factory';
@@ -13,6 +15,7 @@ const container: Container = new Container();
 container.bind('server').to(GameServer).inSingletonScope();
 container.bind<IGame>(TYPES.game).to(Game).inSingletonScope();
 container.bind<IGameWrapper>(TYPES.gamewrapper).to(GameWrapper).inSingletonScope();
+container.bind<ICommandsController>(TYPES.commandscontroller).to(CommandsController).inSingletonScope();
 
 // Factories
 container.bind<IGameObjectFactory>(TYPES.gameobjectfactory).to(GameObjectFactory).inSingletonScope();
