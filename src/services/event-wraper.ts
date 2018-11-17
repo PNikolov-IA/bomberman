@@ -34,7 +34,7 @@ export class EventWrapper {
     this.menucontroller = menucontroller;
     this.instancelistcontroller = instancelistcontroller;
     this.gameobjectcontroller = gameobjectcontroller;
-    console.log(gameobjectcontroller);
+    //console.log(gameobjectcontroller);
     this.socket = io.connect(ADDRESS);
     this.hook();
   }
