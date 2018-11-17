@@ -1,16 +1,14 @@
 import { inject } from 'inversify';
 import { GameObjectType, GLOBALS, IntentType, IUser, MapType } from '../../common';
-import { ICharacter, IMapInstance, IPlayer, IPoint } from '../../contracts';
+import { IGameObjectFactory, IMapInstance, IPlayer, IPoint } from '../../contracts';
 import { MAPS } from '../../data/maps';
 import { TYPES } from '../../setup/types';
 import { IGameObject } from './../../contracts/gameobject';
-import { GameObjectFactory } from './../../models/factories/game-object-factory';
-import { Destructable } from './../../models/gameobjects/destructable';
 
 export class MapInstance implements IMapInstance {
   private static pid: number = 0;
   private _players: IPlayer[];
-  private readonly factory: GameObjectFactory;
+  private readonly factory: IGameObjectFactory;
   private _enemies: IGameObject[];
   private _objects: IGameObject[];
   private _exports: IGameObject[];
@@ -23,7 +21,7 @@ export class MapInstance implements IMapInstance {
   private _mapType: MapType;
   private _completed: boolean = false;
 
-  public constructor(mapType: MapType, @inject(TYPES.gameobjectfactory) factory: GameObjectFactory) {
+  public constructor(mapType: MapType, @inject(TYPES.gameobjectfactory) factory: IGameObjectFactory) {
     this.factory = factory;
     this._id = MapInstance.pid += 1;
     this._mapType = mapType;

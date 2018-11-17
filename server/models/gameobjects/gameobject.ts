@@ -39,4 +39,9 @@ export class GameObject implements IGameObject {
   public get objecttype(): GameObjectType {
     return this._objecttype;
   }
+
+  public updatePos(x: number, y: number): void {
+    this._x = x;
+    this._y = y;
+  }
 }

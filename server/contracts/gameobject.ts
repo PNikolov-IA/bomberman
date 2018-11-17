@@ -7,4 +7,5 @@ export interface IGameObject {
   width: number;
   height: number;
   objecttype: GameObjectType;
+  updatePos(x: number, y: number): void;
 }

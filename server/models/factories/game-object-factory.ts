@@ -1,12 +1,12 @@
 import { injectable } from 'inversify';
 import { GLOBALS } from '../../common/globals';
-import { ICharacter, IGameObject, IPlayer, IPoint } from '../../contracts';
+import { ICharacter, IGameObject, IGameObjectFactory, IPlayer, IPoint } from '../../contracts';
 import { Bomb, Boundary, Destructable, Enemy } from '../gameobjects';
 import { Indestructable } from './../gameobjects/indestructable';
 import { Player } from './../gameobjects/player';
 
 @injectable()
-export class GameObjectFactory {
+export class GameObjectFactory implements IGameObjectFactory {
   private static pid: number = 0;
 
   public constructor() {

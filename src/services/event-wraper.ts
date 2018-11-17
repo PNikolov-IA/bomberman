@@ -1,5 +1,5 @@
-import { GameObjectHolderController } from './../controllers/game-object-holder';
 import { inject, injectable } from 'inversify';
+import { GameObjectHolderController } from './../controllers/game-object-holder';
 
 import * as io from 'socket.io-client';
 import { Notifier } from '.';

@@ -1,21 +1,20 @@
 import { inject, injectable } from 'inversify';
 import { MapType } from '../../common';
-import { IMapInstance } from '../../contracts';
+import { IMapInstance, IMapInstanceFactory } from '../../contracts';
 import { MapInstance } from '../../controllers';
 import { TYPES } from '../../setup/types';
 import { GameObjectFactory } from './game-object-factory';
 
 @injectable()
-export class MapInstanceFactory {
+export class MapInstanceFactory implements IMapInstanceFactory {
 
-  @inject(TYPES.gameobjectfactory)
-  private factory: GameObjectFactory;
+  private _factory: GameObjectFactory;
 
-  public constructor() {
-    // Nothing
+  public constructor(@inject(TYPES.gameobjectfactory) factory: GameObjectFactory) {
+    this._factory = factory;
   }
 
-  public create(maptype: MapType): MapInstance {
-    return new MapInstance(maptype, this.factory);
+  public create(maptype: MapType): IMapInstance {
+    return new MapInstance(maptype, this._factory);
   }
 }

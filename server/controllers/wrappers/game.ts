@@ -1,21 +1,19 @@
 import { inject, injectable } from 'inversify';
-import { MapInstance } from '..';
 import { IUser, MapType } from '../../common';
 import { ISubscriber } from '../../common/subscriber';
-import { IGame, IMapInstance, IPlayer } from '../../contracts';
-import { MapInstanceFactory } from '../../models/factories/map-instance-factory';
+import { IGame, IMapInstance, IMapInstanceFactory } from '../../contracts';
 import { TYPES } from '../../setup/types';
 
 @injectable()
 export class Game implements IGame {
-  @inject(TYPES.mapinstancefacory)
-  private instancefactory: MapInstanceFactory;
+  private _instancefactory: IMapInstanceFactory;
   private _subscribers: ISubscriber[];
-  private _instances: MapInstance[];
+  private _instances: IMapInstance[];
   private readonly _started: Date;
   private _isActive: boolean;
 
-  public constructor() {
+  public constructor(@inject(TYPES.mapinstancefacory) instancefactory: IMapInstanceFactory) {
+    this._instancefactory = instancefactory;
     this._subscribers = [];
     this._instances = [];
     this._started = new Date();
@@ -51,7 +49,7 @@ export class Game implements IGame {
   }
 
   public create(user: IUser): void {
-    const mapInstance: MapInstance = this.instancefactory.create(MapType.Woods);
+    const mapInstance: IMapInstance = this._instancefactory.create(MapType.Woods);
     mapInstance.join(user);
     user.join();
     this._instances.push(mapInstance);
@@ -68,7 +66,7 @@ export class Game implements IGame {
     const instancesData: { id: number; players: number; maxPlayers: number; layout: number }[] = [];
 
     // Update all instances
-    this._instances.forEach((instance: MapInstance) => {
+    this._instances.forEach((instance: IMapInstance) => {
       // To-Do: Need to check if the instance should be updated or removed
       instance.update();
       instancesData.push({
@@ -87,7 +85,7 @@ export class Game implements IGame {
         subscriber.socket.emit('serverdata', instanceResponce);
       } else {
         // Send updated game object data
-        this._instances.forEach((instance: MapInstance) => {
+        this._instances.forEach((instance: IMapInstance) => {
           if (instance.hasUser(subscriber.user)) {
             // tslint:disable-next-line:no-any
             const result: any = {
