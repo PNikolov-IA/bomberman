@@ -9,11 +9,16 @@ export class GameObject implements IGameObject {
   private readonly _height: number;
 
   public constructor(x: number, y: number, height: number, width: number, id: number) {
-    this._id = id;
-    this._x = x;
-    this._y = y;
+
+    // Validation for x and y cordinates of the position of GameObject;
+    if (x && y) {
+      this._x = x;
+      this._y = y;
+    }
+
     this._width = width;
     this._height = height;
+    this._id = id;
   }
 
   public get id(): number {
@@ -41,7 +46,10 @@ export class GameObject implements IGameObject {
   }
 
   public updatePos(x: number, y: number): void {
-    this._x = x;
-    this._y = y;
+    // Validation of x and y before update of the positon
+    if (x && y) {
+      this._x = x;
+      this._y = y;
+    }
   }
 }
