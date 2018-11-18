@@ -15,6 +15,9 @@ body {
 #server-data {
   padding: 10px;
 }
+#logo {
+  padding: 20px;
+}
 
 div.instance-wrapper {
   border-bottom: 1px dashed #333;

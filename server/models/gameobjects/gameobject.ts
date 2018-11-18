@@ -31,10 +31,6 @@ export class GameObject implements IGameObject {
 
     this._x = x;
     this._y = y;
-<<<<<<< HEAD
-=======
-
->>>>>>> 2b4ed04178cb2ab21dab0e414ac1b6ec29d08818
     this._width = width;
     this._height = height;
     this._id = id;

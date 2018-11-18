@@ -16,11 +16,7 @@ export class Bomb extends GameObject implements IGameObject {
     id: number
   ) {
     super(x, y, height, width, id);
-    /* Encapsulate public properties and implement getters
-    Set "planted" to the current Date
-    Set "timeactive" to 0
-    Set "objecttype" to GameObjectType.Bomb
-    */
+
     this._objecttype = GameObjectType.Bomb;
     this._planted = new Date();
     this._timeactive = 0;
