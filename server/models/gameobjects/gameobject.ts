@@ -29,6 +29,8 @@ export class GameObject implements IGameObject {
       throw new Error(`missing argument "id"`);
     }
 
+    this._x = x;
+    this._y = y;
     this._width = width;
     this._height = height;
     this._id = id;
