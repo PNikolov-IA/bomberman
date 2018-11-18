@@ -4,7 +4,8 @@
     ![logo](https://gitlab.com/ogonommo/bomberman/blob/938cd981d85c06723c06fe8fe0f31a278dccc9b7/public/assets/logo.png)
 
     Open source multiplayer game written in Typescript. 
-    The project Bomberman is a browser-based game using Phaser objects but also a specially developed back-end and server logic.
+    The project Bomberman is a browser-based game using Phaser objects 
+    but also a specially developed back-end and server logic.
     
     This project is composed of:
 
@@ -55,7 +56,7 @@
 
 ### 3. Maps
 
-    Two possible varients of the map, each of them have a specific theme Space or Forest.
+    Two possible varients of the map, each of them have a specific theme Space or Forest. Only Forest is permitted for now.
     Space/Forest - Plain classic-style bomberman map including a destructible/indestructible Phaser objects. 
     A borders of the map are covered by trees, obscuring the view.
 
