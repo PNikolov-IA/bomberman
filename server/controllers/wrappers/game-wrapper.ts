@@ -2,7 +2,9 @@ import { inject, injectable } from 'inversify';
 // tslint:disable-next-line:no-import-side-effect
 import 'reflect-metadata';
 import * as IO from 'socket.io';
-import { IUser } from '../../common';
+import { IntentType } from '../../../src/common/intenttype';
+import { IIntentWrap, IUser } from '../../common';
+import { ICommandsController } from '../../common/commands';
 import { IGame, IGameWrapper, IUserFactory } from '../../contracts';
 import { GameServer } from '../../router/server';
 import { TYPES } from '../../setup/types';
@@ -15,15 +17,18 @@ class GameWrapper implements IGameWrapper {
   private _userfactory: IUserFactory;
   private _socketIO: IO.Server;
   private _gameserver: GameServer;
+  private _commandscontroller: ICommandsController;
 
   public constructor(
     @inject('server') gameserver: GameServer,
     @inject(TYPES.game) game: IGame,
-    @inject(TYPES.userfactory) userfactory: IUserFactory
+    @inject(TYPES.userfactory) userfactory: IUserFactory,
+    @inject(TYPES.commandscontroller) commandscontroller: ICommandsController
     ) {
     this._gameserver = gameserver;
     this._game = game;
     this._userfactory = userfactory;
+    this._commandscontroller = commandscontroller;
   }
 
   public start(): void {
@@ -48,6 +53,22 @@ class GameWrapper implements IGameWrapper {
       socket.on('create', (layout: string) => {
         this._game.create(user);
         socket.emit('join', '1');
+      });
+
+      // On intentions response
+      socket.on('intentions', (msg: string) => {
+        const intentions: IntentType[] = [];
+        const response: {intentions: number[]} = JSON.parse(msg);
+
+        response.intentions.forEach((sint: number) => {
+          const itype: string = IntentType[sint];
+          intentions.push(IntentType[<keyof typeof IntentType>itype]);
+        });
+
+        const data: IIntentWrap = {intentions: intentions, id: user.id};
+
+        this._commandscontroller.update(data);
+
       });
 
       // Disconnect from the game

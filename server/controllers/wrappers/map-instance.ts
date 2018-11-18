@@ -1,5 +1,6 @@
 import { inject } from 'inversify';
-import { GameObjectType, GLOBALS, IntentType, IUser, MapType } from '../../common';
+import { GameObjectType, GLOBALS, IIntentWrap, IntentType, IUser, MapType } from '../../common';
+import { ICommandsController } from '../../common/commands';
 import { IGameObjectFactory, IMapInstance, IPlayer, IPoint } from '../../contracts';
 import { MAPS } from '../../data/maps';
 import { TYPES } from '../../setup/types';
@@ -20,9 +21,13 @@ export class MapInstance implements IMapInstance {
   private _id: number;
   private _mapType: MapType;
   private _completed: boolean = false;
+  private _commandscontroller: ICommandsController;
 
-  public constructor(mapType: MapType, @inject(TYPES.gameobjectfactory) factory: IGameObjectFactory) {
+  public constructor(mapType: MapType,
+                     @inject(TYPES.gameobjectfactory) factory: IGameObjectFactory,
+                     @inject(TYPES.commandscontroller) commandscontroller: ICommandsController) {
     this.factory = factory;
+    this._commandscontroller = commandscontroller;
     this._id = MapInstance.pid += 1;
     this._mapType = mapType;
     this._players = [];
@@ -101,10 +106,36 @@ export class MapInstance implements IMapInstance {
   }
 
   public update(): void {
-    /* Do not implement yet
-    This will be tied to controller/keyboard triggers sent over the net
-    */
+    const intentions: IIntentWrap[] = this._commandscontroller.commands;
+    const ids: number[] = this._players.map((player: IPlayer) => player.userID);
 
+    intentions.forEach((intent: IIntentWrap) => {
+      if (ids.indexOf(intent.id) >= 0) {
+
+        const player: IPlayer | undefined = this._players.find((element: IPlayer) => element.userID === intent.id);
+
+        if (!player) {
+          return;
+        }
+
+        if (intent.intentions.indexOf(IntentType.Up) >= 0) {
+          player.updatePos(player.x, player.y - 5);
+        }
+        if (intent.intentions.indexOf(IntentType.Down) >= 0) {
+          player.updatePos(player.x, player.y + 5);
+        }
+        if (intent.intentions.indexOf(IntentType.Left) >= 0) {
+          player.updatePos(player.x - 5, player.y);
+        }
+        if (intent.intentions.indexOf(IntentType.Right) >= 0) {
+          player.updatePos(player.x + 5, player.y);
+        }
+
+        this._commandscontroller.clear(intent.id);
+      }
+    });
+
+    // Create exportable object data
     this._exports = this.enumerate();
   }
 
@@ -149,25 +180,30 @@ export class MapInstance implements IMapInstance {
 
     // Create all boundaries
     mapData.boundaries.forEach((object: { x: number; y: number }) => {
-      const gameobj: IGameObject = this.factory.createBoundary(object.x * GLOBALS.tilewidth, object.y * GLOBALS.tileheigth);
+      const gameobj: IGameObject = this.factory.createBoundary(object.x * GLOBALS.tilewidth -  GLOBALS.tilewidth / 2,
+                                                               object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2);
       this._objects.push(gameobj);
     });
 
     // Create all indestructable objects
     mapData.indestructables.forEach((object: { x: number; y: number }) => {
-      const gameobj: IGameObject = this.factory.createIndestructable(object.x * GLOBALS.tilewidth, object.y * GLOBALS.tileheigth);
+      const gameobj: IGameObject = this.factory.createIndestructable(object.x * GLOBALS.tilewidth -  GLOBALS.tilewidth / 2,
+                                                                     object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2);
       this._objects.push(gameobj);
     });
 
     // Create all destructable objects
     mapData.destructables.forEach((object: { x: number; y: number }) => {
-      const gameobj: IGameObject = this.factory.createDestructable(object.x * GLOBALS.tilewidth, object.y * GLOBALS.tileheigth);
+      const gameobj: IGameObject = this.factory.createDestructable(object.x * GLOBALS.tilewidth -  GLOBALS.tilewidth / 2,
+                                                                   object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2);
       this._objects.push(gameobj);
     });
 
     // Create all enemies
     mapData.enemies.forEach((object: { x: number; y: number; path: IPoint[] }) => {
-      const gameobj: IGameObject = this.factory.createEnemy(object.x * GLOBALS.tilewidth, object.y * GLOBALS.tileheigth, object.path);
+      const gameobj: IGameObject = this.factory.createEnemy(object.x * GLOBALS.tilewidth -  GLOBALS.tilewidth / 2,
+                                                            object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2,
+                                                            object.path);
       this._enemies.push(gameobj);
     });
   }

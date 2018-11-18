@@ -1,4 +1,4 @@
-import { IGameObject, IPlayer, IPoint } from '.';
+import { IGameObject, IPlayer, IPoint } from '..';
 
 export interface IGameObjectFactory {
   createBomb(x: number, y: number): IGameObject;

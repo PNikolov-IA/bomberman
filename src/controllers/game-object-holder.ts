@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
 import phaser from 'phaser';
-import { GameObjectType } from './../../server/common/gameobjecttype';
+import { GameObjectType } from '../common/gameobjecttype';
 
 @injectable()
 export class GameObjectHolderController {
@@ -21,15 +21,17 @@ export class GameObjectHolderController {
     if (data) {
       this.received = data;
     }
-    //console.log(data);
+
   }
 
   public render(scene: phaser.Scene): void {
     // Render cycle
+    let updated: number = 0;
+    let created: number = 0;
 
     // Create new game objects
     // tslint:disable-next-line:no-any
-    const receivedArray: number[] = this.hold.map((el: any) => el.id);
+    const receivedArray: number[] = this.received.map((el: any) => el.id);
     // tslint:disable-next-line:no-any
     const holdArray: number[] = this.hold.map((el: any) => el.id);
     // tslint:disable-next-line:no-any
@@ -41,24 +43,40 @@ export class GameObjectHolderController {
             element.x,
             element.y,
             `Destructable`
-          );
-          //destructable.setDisplaySize(32, 32);
+          ).setDisplaySize(30, 30);
+
           this.hold.push({ id: element.id, sprite: destructable });
+          created += 1;
         }
         if (GameObjectType[element.objecttype] === 'Indestructable') {
           const indestructable: phaser.GameObjects.Sprite = scene.add.sprite(
             element.x,
             element.y,
             `Indestructable`
-          );
-          //indestructable.setDisplaySize(32, 32);
+          ).setDisplaySize(30, 30);
+
           this.hold.push({ id: element.id, sprite: indestructable });
+          created += 1;
+        }
+
+        if (GameObjectType[element.objecttype] === 'Player') {
+          const player: phaser.GameObjects.Sprite = scene.add.sprite(
+            element.x,
+            element.y,
+            `man`
+          );
+
+          player.anims.play('right', true);
+
+          this.hold.push({ id: element.id, sprite: player });
+          created += 1;
         }
 
       } else {
         const index: number = holdArray.indexOf(element.id);
-        this.hold[index].x = element.x;
-        this.hold[index].y = element.y;
+        this.hold[index].sprite.x = element.x;
+        this.hold[index].sprite.y = element.y;
+        updated += 1;
       }
     });
 

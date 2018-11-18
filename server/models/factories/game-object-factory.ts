@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
 import { GLOBALS } from '../../common/globals';
-import { ICharacter, IGameObject, IGameObjectFactory, IPlayer, IPoint } from '../../contracts';
+import { IGameObject, IGameObjectFactory, IPlayer, IPoint } from '../../contracts';
 import { Bomb, Boundary, Destructable, Enemy } from '../gameobjects';
 import { Indestructable } from './../gameobjects/indestructable';
 import { Player } from './../gameobjects/player';
