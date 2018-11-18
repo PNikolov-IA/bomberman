@@ -31,7 +31,6 @@ export class GameObject implements IGameObject {
 
     this._x = x;
     this._y = y;
-
     this._width = width;
     this._height = height;
     this._id = id;

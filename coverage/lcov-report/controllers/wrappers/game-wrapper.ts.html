@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for controllers/wrappers/game-wrapper.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\index.html">All files</a> / <a href="index.html">controllers/wrappers</a> game-wrapper.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">34.21% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>13/38</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.11% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">33.33% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>12/36</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { inject, injectable } from 'inversify';
+// tslint:disable-next-line:no-import-side-effect
+import 'reflect-metadata';
+import * as IO from 'socket.io';
+import { IntentType } from '../../../src/common/intenttype';
+import { IIntentWrap, IUser } from '../../common';
+import { ICommandsController } from '../../common/commands';
+import { IGame, IGameWrapper, IUserFactory } from '../../contracts';
+import { GameServer } from '../../router/server';
+import { TYPES } from '../../setup/types';
+import { Game } from './game';
+&nbsp;
+@injectable()
+class GameWrapper implements IGameWrapper {
+  protected static usersCount: number = 0;
+  private _game: IGame;
+  private _userfactory: IUserFactory;
+  private _socketIO: IO.Server;
+  private _gameserver: GameServer;
+  private _commandscontroller: ICommandsController;
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public constructor(</span>
+    @inject('server') gameserver: GameServer,
+    @inject(TYPES.game) game: IGame,
+    @inject(TYPES.userfactory) userfactory: IUserFactory,
+    @inject(TYPES.commandscontroller) commandscontroller: ICommandsController
+    ) {
+<span class="cstat-no" title="statement not covered" >    this._gameserver = gameserver;</span>
+<span class="cstat-no" title="statement not covered" >    this._game = game;</span>
+<span class="cstat-no" title="statement not covered" >    this._userfactory = userfactory;</span>
+<span class="cstat-no" title="statement not covered" >    this._commandscontroller = commandscontroller;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public start(): void {</span>
+<span class="cstat-no" title="statement not covered" >    this._socketIO = IO.listen(this._gameserver.app);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.hook();</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  private hook(): void {</span></span>
+<span class="cstat-no" title="statement not covered" >    this._socketIO.on('connection', <span class="fstat-no" title="function not covered" >(</span>socket: IO.Server) =&gt; {</span>
+&nbsp;
+      // Connect to the game
+      const user: IUser = <span class="cstat-no" title="statement not covered" >this._userfactory.create(GameWrapper.usersCount += 1);</span>
+<span class="cstat-no" title="statement not covered" >      if (this._game.join({ user: user, socket: socket })) {</span>
+        // Welcome to the server
+<span class="cstat-no" title="statement not covered" >        socket.emit('message', 'Welcome to Bomberman Online!');</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        socket.emit('message', 'Something went wrong, please refresh the webpage.');</span>
+      }
+&nbsp;
+      // On create game request
+<span class="cstat-no" title="statement not covered" >      socket.on('create', <span class="fstat-no" title="function not covered" >(</span>layout: string) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        this._game.create(user);</span>
+<span class="cstat-no" title="statement not covered" >        socket.emit('join', '1');</span>
+      });
+&nbsp;
+      // On intentions response
+<span class="cstat-no" title="statement not covered" >      socket.on('intentions', <span class="fstat-no" title="function not covered" >(</span>msg: string) =&gt; {</span>
+        const intentions: IntentType[] = <span class="cstat-no" title="statement not covered" >[];</span>
+        const response: {intentions: number[]} = <span class="cstat-no" title="statement not covered" >JSON.parse(msg);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        response.intentions.forEach(<span class="fstat-no" title="function not covered" >(</span>sint: number) =&gt; {</span>
+          const itype: string = <span class="cstat-no" title="statement not covered" >IntentType[sint];</span>
+<span class="cstat-no" title="statement not covered" >          intentions.push(IntentType[&lt;keyof typeof IntentType&gt;itype]);</span>
+        });
+&nbsp;
+        const data: IIntentWrap = <span class="cstat-no" title="statement not covered" >{intentions: intentions, id: user.id};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._commandscontroller.update(data);</span>
+&nbsp;
+      });
+&nbsp;
+      // Disconnect from the game
+<span class="cstat-no" title="statement not covered" >      socket.on('disconnect', <span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >        this._game.leave(user);</span>
+      });
+    });
+  }
+}
+&nbsp;
+export { GameWrapper };
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Nov 18 2018 20:45:03 GMT+0200 (FLE Standard Time)
+</div>
+</div>
+<script src="..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\sorter.js"></script>
+</body>
+</html>

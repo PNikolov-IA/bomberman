@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for router/controller/user.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\index.html">All files</a> / <a href="index.html">router/controller</a> user.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">75% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>18/24</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">14.29% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">64.71% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>11/17</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
+  controller,
+  httpDelete,
+  httpGet,
+  httpPost,
+  httpPut
+} from 'inversify-express-utils';
+import { INUser, UserService } from '../service/user';
+&nbsp;
+import { Request } from 'express';
+import { inject } from 'inversify';
+import { TYPES } from '../constant/types';
+&nbsp;
+@controller('/user')
+export class UserController {
+&nbsp;
+  private _userService: UserService;
+&nbsp;
+<span class="fstat-no" title="function not covered" >  constructor(@inject(TYPES.UserService) </span>userService: UserService) {
+<span class="cstat-no" title="statement not covered" >    this._userService = userService;</span>
+  }
+&nbsp;
+  @httpGet('/')
+<span class="fstat-no" title="function not covered" >  public getUsers(): INUser[] {</span>
+<span class="cstat-no" title="statement not covered" >    return this._userService.getUsers();</span>
+  }
+&nbsp;
+  @httpGet('/:id')
+<span class="fstat-no" title="function not covered" >  public getUser(</span>request: Request): INUser {
+<span class="cstat-no" title="statement not covered" >    return this._userService.getUser(request.params.id);</span>
+  }
+&nbsp;
+  @httpPost('/')
+<span class="fstat-no" title="function not covered" >  public newUser(</span>request: Request): INUser {
+<span class="cstat-no" title="statement not covered" >    return this._userService.newUser(request.body);</span>
+  }
+&nbsp;
+  @httpPut('/:id')
+<span class="fstat-no" title="function not covered" >  public updateUser(</span>request: Request): INUser {
+<span class="cstat-no" title="statement not covered" >    return this._userService.updateUser(request.params.id, request.body);</span>
+  }
+&nbsp;
+  @httpDelete('/:id')
+<span class="fstat-no" title="function not covered" >  public deleteUser(</span>request: Request): string {
+<span class="cstat-no" title="statement not covered" >    return this._userService.deleteUser(request.params.id);</span>
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Nov 18 2018 20:45:03 GMT+0200 (FLE Standard Time)
+</div>
+</div>
+<script src="..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\sorter.js"></script>
+</body>
+</html>

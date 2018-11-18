@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">57.89% </span>
+        <span class="strong">94.74% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>11/19</span>
+        <span class='fraction'>18/19</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">16.67% </span>
+        <span class="strong">83.33% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>1/6</span>
+        <span class='fraction'>5/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">52.94% </span>
+        <span class="strong">94.12% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>9/17</span>
+        <span class='fraction'>16/17</span>
       </div>
     </div>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -80,17 +80,13 @@
 35
 36
 37
-38
-39
-40
-41
-42</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+38</td><td class="line-coverage quiet"><span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -101,30 +97,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { GameObjectType } from '../../common';
 import { IGameObject } from '../../contracts';
 import { GameObject } from './gameobject';
@@ -135,35 +127,31 @@ export class Bomb extends GameObject implements IGameObject {
   private readonly _planted: Date;
   private _timeactive: number;
 &nbsp;
-<span class="fstat-no" title="function not covered" >  public constructor(</span>
+  public constructor(
     x: number,
     y: number,
     width: number,
     height: number,
     id: number
   ) {
-<span class="cstat-no" title="statement not covered" >    super(x, y, height, width, id);</span>
-    /* Encapsulate public properties and implement getters
-    Set "planted" to the current Date
-    Set "timeactive" to 0
-    Set "objecttype" to GameObjectType.Bomb
-    */
-<span class="cstat-no" title="statement not covered" >    this._objecttype = GameObjectType.Bomb;</span>
-<span class="cstat-no" title="statement not covered" >    this._planted = new Date();</span>
-<span class="cstat-no" title="statement not covered" >    this._timeactive = 0;</span>
+    super(x, y, height, width, id);
+&nbsp;
+    this._objecttype = GameObjectType.Bomb;
+    this._planted = new Date();
+    this._timeactive = 0;
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  public get planted(): Date {</span>
 <span class="cstat-no" title="statement not covered" >    return this._planted;</span>
   }
-<span class="fstat-no" title="function not covered" >  public get timeleft(): number {</span>
-<span class="cstat-no" title="statement not covered" >    return Bomb._duration - (new Date().valueOf() - this._planted.valueOf());</span>
+  public get timeleft(): number {
+    return Bomb._duration - (new Date().valueOf() - this._planted.valueOf());
   }
-<span class="fstat-no" title="function not covered" >  public get timeactive(): number {</span>
-<span class="cstat-no" title="statement not covered" >    return new Date().valueOf() - this._planted.valueOf();</span>
+  public get timeactive(): number {
+    return new Date().valueOf() - this._planted.valueOf();
   }
-<span class="fstat-no" title="function not covered" >  public get duration(): number {</span>
-<span class="cstat-no" title="statement not covered" >    return Bomb._duration;</span>
+  public get duration(): number {
+    return Bomb._duration;
   }
 }
 &nbsp;</pre></td></tr>
@@ -172,7 +160,7 @@ export class Bomb extends GameObject implements IGameObject {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Nov 18 2018 15:05:49 GMT+0200 (FLE Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Nov 18 2018 20:45:03 GMT+0200 (FLE Standard Time)
 </div>
 </div>
 <script src="..\..\prettify.js"></script>
