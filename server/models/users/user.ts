@@ -4,7 +4,6 @@ export class User implements IUser {
   private _id: number;
   private _gamesPlayed: number;
   private _loggedInOn: Date;
-  private _timeOnline: number;
 
   private _ingame: boolean = false;
 
