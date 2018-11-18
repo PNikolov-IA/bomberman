@@ -5,6 +5,7 @@
   "main": "main.js",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "contro": "^2.1.2",
     "express": "^4.16.4",
     "inversify": "^5.0.1",
     "inversify-express-utils": "^6.2.0",

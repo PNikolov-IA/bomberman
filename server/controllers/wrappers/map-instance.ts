@@ -6,6 +6,7 @@ import { MAPS } from '../../data/maps';
 import { TYPES } from '../../setup/types';
 import { IGameObject } from './../../contracts/gameobject';
 
+const MOVE_STEP: number = 3;
 export class MapInstance implements IMapInstance {
   private static pid: number = 0;
   private _players: IPlayer[];
@@ -24,8 +25,8 @@ export class MapInstance implements IMapInstance {
   private _commandscontroller: ICommandsController;
 
   public constructor(mapType: MapType,
-    @inject(TYPES.gameobjectfactory) factory: IGameObjectFactory,
-    @inject(TYPES.commandscontroller) commandscontroller: ICommandsController) {
+                     @inject(TYPES.gameobjectfactory) factory: IGameObjectFactory,
+                     @inject(TYPES.commandscontroller) commandscontroller: ICommandsController) {
     this.factory = factory;
     this._commandscontroller = commandscontroller;
     this._id = MapInstance.pid += 1;
@@ -84,7 +85,7 @@ export class MapInstance implements IMapInstance {
 
   public join(user: IUser): void {
     if (this.canJoin(user)) {
-      const player: IPlayer = this.factory.createPlayer(250, 250);
+      const player: IPlayer = this.factory.createPlayer(45, 45);
       user.join();
       player.userID = user.id;
       this._players.push(player);
@@ -119,17 +120,64 @@ export class MapInstance implements IMapInstance {
           return;
         }
 
-        if (intent.intentions.indexOf(IntentType.Up) >= 0) {
-          player.updatePos(player.x, player.y - 5);
+        let canMoveLeft: boolean = true;
+        let canMoveRight: boolean = true;
+        let canMoveUp: boolean = true;
+        let canMoveDown: boolean = true;
+
+        let moved: boolean = false;
+
+        this._objects.forEach((object: IGameObject) => {
+          if (object.objecttype === GameObjectType.Indestructable ||
+              object.objecttype === GameObjectType.Destructable ||
+              object.objecttype === GameObjectType.Boundary) {
+                if (Math.abs(object.x - player.x) < 3) {
+                  if (object.y - player.y > 20 && object.y - player.y <= 30) {
+                    canMoveDown = false;
+                  }
+                  if (player.y - object.y > 20 && player.y - object.y <= 30) {
+                    canMoveUp = false;
+                  }
+                }
+
+                if (Math.abs(object.y - player.y) < 3) {
+                  if (object.x - player.x > 20 && object.x - player.x <= 30) {
+                    canMoveRight = false;
+                  }
+                  if (player.x - object.x > 20 && player.x - object.x <= 30) {
+                    canMoveLeft = false;
+                  }
+                }
+              }
+        });
+
+        if ((player.x - 15) % 30) {
+          canMoveDown = false;
+          canMoveUp = false;
         }
-        if (intent.intentions.indexOf(IntentType.Down) >= 0) {
-          player.updatePos(player.x, player.y + 5);
+
+        if ((player.y - 15) % 30) {
+          canMoveLeft = false;
+          canMoveRight = false;
         }
-        if (intent.intentions.indexOf(IntentType.Left) >= 0) {
-          player.updatePos(player.x - 5, player.y);
+
+        // Debug: console.log(canMoveLeft, canMoveRight, canMoveUp, canMoveDown, player.x, player.y);
+
+        if (intent.intentions.indexOf(IntentType.Up) >= 0 && canMoveUp && !moved) {
+          player.updatePos(player.x, player.y - MOVE_STEP);
+          moved = true;
         }
-        if (intent.intentions.indexOf(IntentType.Right) >= 0) {
-          player.updatePos(player.x + 5, player.y);
+        if (intent.intentions.indexOf(IntentType.Down) >= 0 && canMoveDown && !moved) {
+          player.updatePos(player.x, player.y + MOVE_STEP);
+          moved = true;
+        }
+        if (intent.intentions.indexOf(IntentType.Left) >= 0 && canMoveLeft && !moved) {
+          player.updatePos(player.x - MOVE_STEP, player.y);
+          moved = true;
+        }
+        if (intent.intentions.indexOf(IntentType.Right) >= 0 && canMoveRight && !moved) {
+          player.updatePos(player.x + MOVE_STEP, player.y);
+          moved = true;
         }
 
         this._commandscontroller.clear(intent.id);
@@ -182,29 +230,29 @@ export class MapInstance implements IMapInstance {
     // Create all boundaries
     mapData.boundaries.forEach((object: { x: number; y: number }) => {
       const gameobj: IGameObject = this.factory.createBoundary(object.x * GLOBALS.tilewidth - GLOBALS.tilewidth / 2,
-        object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2);
+                                                               object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2);
       this._objects.push(gameobj);
     });
 
     // Create all indestructable objects
     mapData.indestructables.forEach((object: { x: number; y: number }) => {
       const gameobj: IGameObject = this.factory.createIndestructable(object.x * GLOBALS.tilewidth - GLOBALS.tilewidth / 2,
-        object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2);
+                                                                     object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2);
       this._objects.push(gameobj);
     });
 
     // Create all destructable objects
     mapData.destructables.forEach((object: { x: number; y: number }) => {
       const gameobj: IGameObject = this.factory.createDestructable(object.x * GLOBALS.tilewidth - GLOBALS.tilewidth / 2,
-        object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2);
+                                                                   object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2);
       this._objects.push(gameobj);
     });
 
     // Create all enemies
     mapData.enemies.forEach((object: { x: number; y: number; path: IPoint[] }) => {
       const gameobj: IGameObject = this.factory.createEnemy(object.x * GLOBALS.tilewidth - GLOBALS.tilewidth / 2,
-        object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2,
-        object.path);
+                                                            object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2,
+                                                            object.path);
       this._enemies.push(gameobj);
     });
   }

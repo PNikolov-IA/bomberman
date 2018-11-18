@@ -11,6 +11,7 @@ export class Game implements IGame {
   private _instances: IMapInstance[];
   private readonly _started: Date;
   private _isActive: boolean;
+  private lastUpdated: Date;
 
   public constructor(@inject(TYPES.mapinstancefacory) instancefactory: IMapInstanceFactory) {
     this._instancefactory = instancefactory;
@@ -31,6 +32,7 @@ export class Game implements IGame {
       this._subscribers.push(sub);
       if (!this._isActive) {
         this._isActive = true;
+        this.lastUpdated = new Date();
         setTimeout(this.update.bind(this));
       }
     }
@@ -61,6 +63,12 @@ export class Game implements IGame {
       this._isActive = false;
 
       return;
+    }
+
+    const delta: number = new Date().valueOf() - this.lastUpdated.valueOf();
+
+    if (delta > 100) {
+      console.log(`Lag spike of ${delta}.`);
     }
 
     const instancesData: { id: number; players: number; maxPlayers: number; layout: number }[] = [];
@@ -97,6 +105,8 @@ export class Game implements IGame {
         });
       }
     });
+
+    this.lastUpdated = new Date();
 
     setTimeout(this.update.bind(this), 50);
   }

@@ -3,7 +3,7 @@
 
 # Bomberman
 
-    Open source multiplayer game written in Typescript. 
+    Open-source multiplayer game written in Typescript. 
     The project Bomberman is a browser-based game using Phaser objects 
     but also a specially developed back-end and server logic.
     
@@ -11,8 +11,9 @@
 
     * The Bomberman client is connected to a server
     * The Bomberman server runs the game
-    * The cliend sends commands to the server and expect the server response and the game flow
+    * The client sends commands to the server and expects the server respond and controll the game flow
     * The client may leave the game on any time by braking server connection
+    * _Locktep mode_ is in place to prevent cheating and insure no desync is happening
 
 
 ### Team name: S.P.I
@@ -47,26 +48,27 @@
 ### 1. Controlls
 
     Use your movement WASD keys to move and space (action) key to place a bomb.
+    Alternatively you can use a controller (i.e. XBOX controller)
 
 ### 2. Multiplayer Specific 
 
-    Multiplayer mode is limmited up to 4 players simultaniously in one room.  
+    Multiplayer mode is limited up to 4 players simultaniously in one room.  
     A player is a generated Phaser hero animation... with fancy style and fast movement.
-    The abilities of the bomberman-hero are limited for now but still includes multiple bombs and common firepower.
+    The abilities of the bomberman-hero are limited for now but still includes multiple bombs and common firepower (not implemented yet).
 
 ### 3. Maps
 
-    Two possible varients of the map, each of them have a specific theme Space or Forest. Only Forest is permitted for now.
+    Two possible varients of the map, each of them have a specific theme Space or Forest. Only Forest is implemented for now.
     Space/Forest - Plain classic-style bomberman map including a destructible/indestructible Phaser objects. 
-    A borders of the map are covered by trees, obscuring the view.
+    The borders of the map are covered by trees, obscuring the view.
 
 ### 4. Enemies
 
-    Needs to be implimented into the game.
+    Need to be implimented into the game.
 
 ### 5. Bombs
 
-    Needs to be implimented into the game.
+    Need to be implimented into the game.
     
 ### Ongoing work and Testing
 
@@ -77,6 +79,7 @@
 ### Stack
 
     NodeJS
+    Inversify Tools for Express
     Typescript
     Socket.IO
     Phaser
@@ -87,7 +90,7 @@
     
 ### MIT License
  
-Copyright (c) 2018 Stoyan Peshev
+Copyright (c) 2018 Team S.P.I.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

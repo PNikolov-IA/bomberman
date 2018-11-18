@@ -1,6 +1,7 @@
+// tslint:disable-next-line:no-any
 const TAGS: any = {
-    HomeController: 'HomeController',
-    UserController: 'UserController'
+    VersionController: 'VersionController'
 };
 
+// tslint:disable-next-line:export-name
 export { TAGS };

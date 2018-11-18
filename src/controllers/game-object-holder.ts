@@ -43,7 +43,7 @@ export class GameObjectHolderController {
             element.x,
             element.y,
             `Destructable`
-          ).setDisplaySize(30, 30);
+          );
 
           this.hold.push({ id: element.id, sprite: destructable });
           created += 1;
@@ -53,7 +53,7 @@ export class GameObjectHolderController {
             element.x,
             element.y,
             `Indestructable`
-          ).setDisplaySize(30, 30);
+          );
 
           this.hold.push({ id: element.id, sprite: indestructable });
           created += 1;
