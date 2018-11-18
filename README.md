@@ -1,7 +1,7 @@
-# Bomberman
+.
+    ![logo](/public/assets/logo.png)
 
-    Inline-style: 
-    ![logo](https://gitlab.com/ogonommo/bomberman/blob/938cd981d85c06723c06fe8fe0f31a278dccc9b7/public/assets/logo.png)
+# Bomberman
 
     Open source multiplayer game written in Typescript. 
     The project Bomberman is a browser-based game using Phaser objects 
