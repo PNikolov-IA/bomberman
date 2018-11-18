@@ -66,7 +66,7 @@ export class GameScene extends phaser.Scene {
       // this.playerWithAnimation.setFlipX(true);
       // this.playerWithAnimation.x -= 4;
     } else if (this.input.keyboard.addKey('D').isDown) {
-      intentions.push(IntentType.Right)
+      intentions.push(IntentType.Right);
       // this.playerWithAnimation.setFlipX(false);
       // this.playerWithAnimation.x += 4;
     }
@@ -74,7 +74,7 @@ export class GameScene extends phaser.Scene {
       intentions.push(IntentType.Up);
       // this.playerWithAnimation.y -= 4;
     } else if (this.input.keyboard.addKey('S').isDown) {
-      intentions.push(IntentType.Down)
+      intentions.push(IntentType.Down);
       // this.playerWithAnim ation.y += 4;
     }
 

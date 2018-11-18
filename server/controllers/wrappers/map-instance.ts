@@ -24,8 +24,8 @@ export class MapInstance implements IMapInstance {
   private _commandscontroller: ICommandsController;
 
   public constructor(mapType: MapType,
-                     @inject(TYPES.gameobjectfactory) factory: IGameObjectFactory,
-                     @inject(TYPES.commandscontroller) commandscontroller: ICommandsController) {
+    @inject(TYPES.gameobjectfactory) factory: IGameObjectFactory,
+    @inject(TYPES.commandscontroller) commandscontroller: ICommandsController) {
     this.factory = factory;
     this._commandscontroller = commandscontroller;
     this._id = MapInstance.pid += 1;
@@ -85,6 +85,7 @@ export class MapInstance implements IMapInstance {
   public join(user: IUser): void {
     if (this.canJoin(user)) {
       const player: IPlayer = this.factory.createPlayer(250, 250);
+      user.join();
       player.userID = user.id;
       this._players.push(player);
       player.instance = this;
@@ -176,34 +177,34 @@ export class MapInstance implements IMapInstance {
 
   private load(mapType: MapType): void {
     // tslint:disable-next-line:no-any
-    const mapData: any = MAPS[MapType.Woods];
+    const mapData: any = MAPS[this._mapType];
 
     // Create all boundaries
     mapData.boundaries.forEach((object: { x: number; y: number }) => {
-      const gameobj: IGameObject = this.factory.createBoundary(object.x * GLOBALS.tilewidth -  GLOBALS.tilewidth / 2,
-                                                               object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2);
+      const gameobj: IGameObject = this.factory.createBoundary(object.x * GLOBALS.tilewidth - GLOBALS.tilewidth / 2,
+        object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2);
       this._objects.push(gameobj);
     });
 
     // Create all indestructable objects
     mapData.indestructables.forEach((object: { x: number; y: number }) => {
-      const gameobj: IGameObject = this.factory.createIndestructable(object.x * GLOBALS.tilewidth -  GLOBALS.tilewidth / 2,
-                                                                     object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2);
+      const gameobj: IGameObject = this.factory.createIndestructable(object.x * GLOBALS.tilewidth - GLOBALS.tilewidth / 2,
+        object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2);
       this._objects.push(gameobj);
     });
 
     // Create all destructable objects
     mapData.destructables.forEach((object: { x: number; y: number }) => {
-      const gameobj: IGameObject = this.factory.createDestructable(object.x * GLOBALS.tilewidth -  GLOBALS.tilewidth / 2,
-                                                                   object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2);
+      const gameobj: IGameObject = this.factory.createDestructable(object.x * GLOBALS.tilewidth - GLOBALS.tilewidth / 2,
+        object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2);
       this._objects.push(gameobj);
     });
 
     // Create all enemies
     mapData.enemies.forEach((object: { x: number; y: number; path: IPoint[] }) => {
-      const gameobj: IGameObject = this.factory.createEnemy(object.x * GLOBALS.tilewidth -  GLOBALS.tilewidth / 2,
-                                                            object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2,
-                                                            object.path);
+      const gameobj: IGameObject = this.factory.createEnemy(object.x * GLOBALS.tilewidth - GLOBALS.tilewidth / 2,
+        object.y * GLOBALS.tileheigth - GLOBALS.tileheigth / 2,
+        object.path);
       this._enemies.push(gameobj);
     });
   }

@@ -35,9 +35,9 @@ export const MAPS: any = {
     enemies: [{ x: 10, y: 10, path: [{ x: 10, y: 10 }, { x: 10, y: 11 }] }]
   },
   [MapType.Space]: {
-    destructables: [{ x: 100, y: 100 }],
-    indestructables: [{ x: 200, y: 200 }],
-    boundaries: [],
-    enemies: []
+    destructables: [{ x: 1, y: 1 }],
+    indestructables: [{ x: 2, y: 2 }, { x: 3, y: 3 }],
+    boundaries: [{ x: 0, y: 0 }, { x: 1, y: 0 }, { x: 2, y: 0 }],
+    enemies: [{ x: 10, y: 10, path: [{ x: 10, y: 10 }, { x: 10, y: 11 }] }]
   }
 };

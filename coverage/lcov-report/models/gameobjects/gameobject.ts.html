@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for models/gameobjects/gameobject.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\index.html">All files</a> / <a href="index.html">models/gameobjects</a> gameobject.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">54.05% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>20/37</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">35.71% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>5/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">22.22% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">52.78% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>19/36</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { GameObjectType } from '../../common';
+import { IGameObject } from '../../contracts';
+export class GameObject implements IGameObject {
+  protected _objecttype: GameObjectType;
+  private _x: number;
+  private _y: number;
+  private _id: number;
+  private readonly _width: number;
+  private readonly _height: number;
+&nbsp;
+  public constructor(x: number, y: number, height: number, width: number, id: number) {
+&nbsp;
+    // Validation for x and y cordinates of the position of GameObject;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (x === undefined) {
+<span class="cstat-no" title="statement not covered" >      throw new Error(`missing argument "x"`);</span>
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (y === undefined) {
+<span class="cstat-no" title="statement not covered" >      throw new Error(`missing argument "y"`);</span>
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (height === undefined) {
+<span class="cstat-no" title="statement not covered" >      throw new Error(`missing argument "height"`);</span>
+    }
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (width === undefined) {
+<span class="cstat-no" title="statement not covered" >      throw new Error(`missing argument "width"`);</span>
+    }
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (id === undefined) {
+<span class="cstat-no" title="statement not covered" >      throw new Error(`missing argument "id"`);</span>
+    }
+&nbsp;
+    this._x = x;
+    this._y = y;
+&nbsp;
+    this._width = width;
+    this._height = height;
+    this._id = id;
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public get id(): number {</span>
+<span class="cstat-no" title="statement not covered" >    return this._id;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public get x(): number {</span>
+<span class="cstat-no" title="statement not covered" >    return this._x;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public get y(): number {</span>
+<span class="cstat-no" title="statement not covered" >    return this._y;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public get width(): number {</span>
+<span class="cstat-no" title="statement not covered" >    return this._width;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public get height(): number {</span>
+<span class="cstat-no" title="statement not covered" >    return this._height;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public get objecttype(): GameObjectType {</span>
+<span class="cstat-no" title="statement not covered" >    return this._objecttype;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public updatePos(</span>x: number, y: number): void {
+    // Validation of x and y before update of the positon
+<span class="cstat-no" title="statement not covered" >    if (x === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new Error(`missing argument "x"`);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (y === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new Error(`missing argument "y"`);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this._x = x;</span>
+<span class="cstat-no" title="statement not covered" >    this._y = y;</span>
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Nov 18 2018 15:05:49 GMT+0200 (FLE Standard Time)
+</div>
+</div>
+<script src="..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\sorter.js"></script>
+</body>
+</html>

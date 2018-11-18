@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for models/gameobjects/player.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="..\..\prettify.css" />
+    <link rel="stylesheet" href="..\..\base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(..\..\sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="..\..\index.html">All files</a> / <a href="index.html">models/gameobjects</a> player.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">46.88% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>15/32</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">8.33% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">43.33% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>13/30</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { GameObjectType, IntentType, MapType } from '../../common';
+import { IMapInstance, IPlayer } from '../../contracts';
+import { MapInstance } from '../../controllers';
+import { GameObject } from './gameobject';
+&nbsp;
+export class Player extends GameObject implements IPlayer {
+  private static pid: number = 0;
+  private _points: number;
+  private _lastActive: Date;
+  private _instance: MapInstance | null;
+  private _isAlive: boolean;
+  private _intents: IntentType[];
+  private readonly <span class="cstat-no" title="statement not covered" >_speed: number = 20;</span>
+  private _playerID: number;
+  private _userID: number;
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public constructor(</span>
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    id: number
+  ) {
+<span class="cstat-no" title="statement not covered" >    super(x, y, height, width, id);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this._points = 0;</span>
+<span class="cstat-no" title="statement not covered" >    this._instance = null;</span>
+<span class="cstat-no" title="statement not covered" >    this._lastActive = new Date();</span>
+<span class="cstat-no" title="statement not covered" >    this._isAlive = true;</span>
+<span class="cstat-no" title="statement not covered" >    this._objecttype = GameObjectType.Player;</span>
+<span class="cstat-no" title="statement not covered" >    this._playerID = Player.pid += 1;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public get points(): number {</span>
+<span class="cstat-no" title="statement not covered" >    return this._points;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public get instance(): MapInstance | null {</span>
+<span class="cstat-no" title="statement not covered" >    return this._instance;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public set instance(</span>instance: MapInstance | null) {
+<span class="cstat-no" title="statement not covered" >    this._instance = instance;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public get lastActive(): Date {</span>
+<span class="cstat-no" title="statement not covered" >    return this._lastActive;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public get isAlive(): boolean {</span>
+<span class="cstat-no" title="statement not covered" >    return this._isAlive;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public get playerID(): number {</span>
+<span class="cstat-no" title="statement not covered" >    return this._playerID;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public set userID(</span>id: number) {
+<span class="cstat-no" title="statement not covered" >    this._userID = id;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public get userID(): number {</span>
+<span class="cstat-no" title="statement not covered" >    return this._userID;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public get speed(): number {</span>
+<span class="cstat-no" title="statement not covered" >    return this._speed;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  public update(</span>intents: IntentType[]): void {
+    /* Do not implement yet
+    Logic pending on clarifying the update cycle throughout game objects
+    */
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Nov 18 2018 15:05:49 GMT+0200 (FLE Standard Time)
+</div>
+</div>
+<script src="..\..\prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="..\..\sorter.js"></script>
+</body>
+</html>
